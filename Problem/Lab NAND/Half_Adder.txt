@@ -1,0 +1,16 @@
+----------Example----------
+
+nand : - (p^q)
+
+double nand : -( - (p^q) ^ - (p^q) ) = ( p ^ q )
+
+SOP (and) : (-a ^ -b) v (-a ^ b)
+
+SOP (nand) : -(  -( -a ^ b )  ^  -( -a ^ b )  )
+
+----------Logic----------
+
+1Y : - ( a ^ b ) [ Cout condition ]
+2Y : - ( -( a ^ b ) ^ a ) = - ( -b ^ a ) [ sum condition ]
+3Y : - ( - ( -b ^ a ) ^ - ( -a ^ b ) ) [ SOP - sum condition ]
+4Y : - ( -(a ^b ) ^ b ) = - ( -a ^ b ) [ sum condition ]

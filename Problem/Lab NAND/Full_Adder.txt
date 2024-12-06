@@ -1,0 +1,22 @@
+----------Logic----------
+
+Board 1 
+1Y : - (a ^ b)
+2Y :  - ( b ^ c )
+3Y : ( a ^ b )
+4Y :  - ( a ^ c )
+
+Board 2
+1Y : - ( - ( a ^ c ) ^ - (a ^ b) ^ - ( b ^ c ) )
+2Y :  - ( a ^ c ) ^ - (a ^ b) ^ - ( b ^ c )
+3Y : - ( a ^ c ) ^ - (a ^ b)
+4Y : - ( - ( a ^ c ) ^ - (a ^ b) )
+
+Board 3
+1Y : ( a ^ b ^ c )
+2Y :  - ( ( a ^ b ^ c ) ^ -Sum )
+3Y : ( a ^ b ) 
+4Y : - ( a ^ b ^ c )
+-( a ^ b ^ c ) v Sum
+Sum Final Form :  - ( - ( a ^ c ) ^ - (a ^ b) ^ - ( b ^ c ) ) = ( a ^ c ) v (a ^ b) v ( b ^ c ) = Sum
+Cout Final Form : ( ( a ^ b ^ c ) ^ -Sum ) = - ( -( a ^ b ^ c ) v Sum ) = ( a ^ b ^ c ) ^ - Sum

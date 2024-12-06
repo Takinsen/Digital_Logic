@@ -1,0 +1,143 @@
+0b0000100001111			accA ← Operand ( accA = 15 )
+0b0001000110101			accB ← Operand ( accB = 53 )
+0b1000100000000			accA ← accA + accB ( accA =  68)
+0b0101100000011			rRAM_adr[Operand] ← accA
+0b1111100000000			STOP
+
+test rRam
+0 : 0b0000100000011			accA ← Operand ( accA = 3 )
+1 : 0b0101100000000			rRAM_adr[0x00] ← accA
+2 : 0b0010000000000			accB ← accA
+3 : 0b1110000000000			accA ← accA << accB
+4 : 0b0101100000001			rRAM_adr[0x01] ← accA
+5 : 0b0101000000000			accA ← rRAM_adr[0x00]
+6 : 0b0101100001111			rRAM_adr[0x0F] ← accA
+7 : 0b1111100000000			STOP
+
+test jump1
+0b0000100001111			accA ← Operand ( accA = 15 )
+0b0001000110101			accB ← Operand ( accB = 53 )
+0b1011100000000                                              compare
+0b0111100010000			Jump to address 0x10 if le (  jump )
+0b1000100000000			accA ← accA + accB ( accA =  68)
+0b0101100000011			rRAM_adr[Operand] ← accA
+
+test jump2
+0b0000100001111			accA ← Operand ( accA = 15 )
+0b0001000110101			accB ← Operand ( accB = 53 )
+0b1011100000000                                              compare
+0b0111000001111			Jump to address 0x0F if gr ( don't jump )
+0b1000000001110			Jump to address 0x0E if eq or gr ( don't  jump )
+0b0111100010000			Jump to address 0x10 if le (  jump )
+0b1000100000000			accA ← accA + accB ( accA =  68)
+0b0101100000011			rRAM_adr[Operand] ← accA
+0b1111100000000			STOP
+
+test jump3
+0 : 0b0000100001111			accA ← Operand ( accA = 15 )
+1 : 0b0001000110101			accB ← Operand ( accB = 53 )
+2 : 0b1011100000000                                         compare
+3 : 0b0111100000101			Jump to address 0x05 if le ( jump then not jump )
+4 : 0b1000100000000			accA ← accA + accB  ( accA = 30 )
+5 : 0b0111100000111			Jump to address 0x07 if le (  jump then not jump )
+6 : 0b1000100000000			accA ← accA + accB	( accA = 45 )
+7 : 0b0111000001011			Jump to address 0x0B if gr ( don't jump then jump )
+8 : 0b0010000000000			accB ← accA ( accB = 15 )
+9 : 0b1011100000000                                         compare
+10 : 0b0110100000011		Jump to address 0x03 if equal ( jump )	
+11 : 0b0101100000011		rRAM_adr[0x03] ← accA
+12 : 0b1111100000000		STOP
+
+test prime
+0 : 0b0000100001111			accA ← Operand ( accA = 15 )
+1 : 0b1110100000000			IsPrime( accA )
+2 : 0b0110100000000			Jump to address 0x00 if equal ( don't jump )
+3 : 0b0000100000001			accA ← Operand ( accA = 1 )
+4 : 0b0110100000010			Jump to address 0x02 if equal ( don't jump )
+5 : 0b0000111000111			accA ← Operand ( accA = 199 )
+6 : 0b1110100000000			IsPrime( accA )
+7 : 0b0110100001001			Jump to address 0x09 if equal ( jump )
+8 : 0b0101100000001			rRAM_adr[0x01] ← accA
+9 : 0b1111100000000			STOP
+
+Arithmatic_Test
+0 : 0b0000100110001			accA ← Operand ( accA = 49 )
+1 : 0b0001000001010			accB ← Operand ( accB = 10 = 0000 1010 )
+2 : 0b1000100000000			accA ← accA + accB ( accA = 59 = 0011 1011 )
+3 : 0b1001100000000			accA ← accA * accB ( accA = 110 = 0110 1110)
+4 : 0b0101100000000			rRAM_adr[0x00] ← accA
+5 : 0b1101100000000			accA ← accA XOR accB ( accA = 100 = 0110 0100 )
+6 : 0b1100000000000			accA ← NOT(accA) ( accA = 155 = 1001 1011 )
+7 : 0b0010100000000			regC ← accA ( regC = 155 )
+8 : 0b1010100000000			accA ← accA % accB ( accA = 5 = 0000 0101 )
+9 : 0b1110000000000			accA ← accA << accB ( accA =  20 = 0001 0100 )
+10 : 0b1010000000000		accA ← accA / accB ( accA = 2 = 0000 0010 )
+11 : 0b0101100000001		rRAM_adr[0x01] ← accA
+12 : 0b1011000000000		accA ← accA ^ accB ( accA = 4 = 0000 0100 )
+13 : 0b1101000000000		accA ← accA OR accB ( accA = 14 = 0000 1110 )
+14 : 0b0010000000000		accB ← accA ( accB = 14 = 0000 1110 )
+15 : 0b0011000000000		accA ← regC ( accA = 155 = 1001 1011 )
+16 : 0b1001000000000		accA ← accA - accB ( accA = 141 = 1000 1101 )
+17 : 0b0101100000010		rRAM_adr[0x02] ← accA
+18 : 0b1100100000000		accA ← accA AND accB ( accA = 12 = 0000 1100 )
+19 : 0b0101100001111		rRAM_adr[0x0F] ← accA
+20 : 0b1111100000000		STOP
+
+Super_Test
+0 : 0b0000100110001			accA ← Operand ( accA = 49 )
+1 : 0b0001000001010			accB ← Operand ( accB = 10 = 0000 1010 )
+2 : 0b1000100000000			accA ← accA + accB ( accA = 59 = 0011 1011 )
+3 : 0b1001100000000			accA ← accA * accB ( accA = 110 = 0110 1110)
+4 : 0b0101100000000			rRAM_adr[0x00] ← accA
+5 : 0b1101100000000			accA ← accA XOR accB ( accA = 100 = 0110 0100 )
+6 : 0b1100000000000			accA ← NOT(accA) ( accA = 155 = 1001 1011 )
+7 : 0b0010100000000			regC ← accA ( regC = 155 )
+8 : 0b1010100000000			accA ← accA % accB ( accA = 5 = 0000 0101 )
+9 : 0b1110000000000			accA ← accA << accB ( accA =  20 = 0001 0100 )
+10 : 0b1010000000000		accA ← accA / accB ( accA = 2 = 0000 0010 )
+11 : 0b0101100000001		rRAM_adr[0x01] ← accA
+12 : 0b1011000000000		accA ← accA ^ accB ( accA = 4 = 0000 0100 )
+13 : 0b1101000000000		accA ← accA OR accB ( accA = 14 = 0000 1110 )
+14 : 0b0010000000000		accB ← accA ( accB = 14 = 0000 1110 )
+15 : 0b0011000000000		accA ← regC ( accA = 155 = 1001 1011 )
+16 : 0b1001000000000		accA ← accA - accB ( accA = 141 = 1000 1101 )
+17 : 0b0101100000010		rRAM_adr[0x02] ← accA
+18 : 0b1100100000000		accA ← accA AND accB ( accA = 12 = 0000 1100 )
+19 : 0b0101100001111		rRAM_adr[0x0F] ← accA
+20 : 0b0101000000001		accA ← rRAM_adr[0x01] ( accA = 2 )
+21 : 0b1000000011001		Jump to address 0x19 if eq or gr ( don't jump )
+22 : 0b1011100000000		compare
+23 : 0b1110111111111		isPrime( accA )
+24 : 0b0111100011010		Jump to address 0x1A if le ( jump )
+25 : 0b0101100000000		rRAM_adr[0x00] ← accA
+26 : 0b0011111111111		regC ← M ( regC = 127 )
+27 : 0b0111000100000		Jump to address 0x20 if gr ( don't jump then jump )		
+28 : 0b0011000000000		accA ← regC ( accA = 127 ) 
+29 : 0b1011100000000		compare
+30 : 0b0101100000011		rRAM_adr[0x03] ← accA
+31 : 0b0110000011011		Jump to address 0x1B	
+32 : 0b0100100100010		accA ← pRAM_adr[0x22] ( accA = 14 )
+33 : 0b0100000000000		regC ← N ( regC = 15 )
+34 : 0b1011100001110		compare	
+35 : 0b0110100100101		Jump to address 0x25 if equal	
+36 : 0b1111111111111		STOP
+37 : 0b0101100000100		rRAM_adr[0x04] ← accA
+38 : 0b0101000000011		accA ← rRAM_adr[0x03] ( accA = 127 )
+39 : 0b0100100100010		accA ← pRAM_adr[0x22] ( accA = 14 )
+40 : 0b0011000000000		accA ← regC ( accA = 15 ) 
+41 : 0b1011100000000		compare	
+42 : 0b1010100000000		accA ← accA % accB ( accA = 1 )
+43 : 0b1110100000000		isPrime( accA )
+44 : 0b0110100100100		Jump to address 0x24 if eq ( don't jump )
+45 : 0b0101100000101		rRAM_adr[0x05] ← accA
+46 : 0b0111100100100		Jump to address 0x24 if le ( don't jump )
+47 : 0b0001100000000		accA ← accB ( accA = 14 )
+48 : 0b1001100000000		accA ← accA ^ accB	( accA = 196 )
+49 : 0b0101100000110		rRAM_adr[0x06] ← accA
+50 : 0b0111000100100		Jump to address 0x24 if gr ( jump )
+ 		
+
+
+
+
+
